@@ -10,6 +10,7 @@ class ResourcesController < ApplicationController
   # GET /resources/1
   # GET /resources/1.json
   def show
+
   end
 
   # GET /resources/new
@@ -59,6 +60,10 @@ class ResourcesController < ApplicationController
       format.html { redirect_to resources_url, notice: 'Resource was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def display
+    @music = Resource.find(params[0])
   end
 
   private
