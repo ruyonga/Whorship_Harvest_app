@@ -1,5 +1,13 @@
 .main{
-	margin-right: 10%;
-	margin-left: 10%;
+	margin-right: 5%;
+	margin-left: 5%;
 
+}
+
+body{ 
+  background: url(bg.jpeg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }

@@ -46,8 +46,12 @@ group :production do
   	gem 'pg'
   	gem 'rails_12factor'
 end
-gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'bcrypt-ruby', '~> 3.1.5'
 gem 'nivo-rails'
+gem 'bootstrap_form'
 gem 'paperclip', '~> 4.2.1'
+#multiple image upload
+gem 'carrierwave'
+
 gem 'haml', '~> 4.0.6'
 

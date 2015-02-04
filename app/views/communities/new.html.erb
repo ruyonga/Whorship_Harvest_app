@@ -1,5 +1,27 @@
-<h1>New Community</h1>
 
-<%= render 'form' %>
+<% @page_title= "Add Community"%>
+<div class="header">
+	<%= render(:partial => 'layouts/navbar')%>
+</div>
+<h1>Add Community</h1>
+<div class="col-md-8">
+	<%= render 'form' %>
 
-<%= link_to 'Back', communities_path %>
+	<%= link_to 'Back', communities_path %>
+</div>
+<div class="col-md-4">
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<h3 class="panel-title">Admin Tasks</h3>
+		</div>
+		<div class="panel-body">
+			
+		</div>
+	</div>
+	
+</div>
+
+
+<div id="footer" style="position:bottom;">
+	<%= render(:partial => 'layouts/footer')%>
+</div>
