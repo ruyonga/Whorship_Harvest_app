@@ -1,0 +1,15 @@
+<% @page_title = "Edit Community" %>
+<div class="header">
+<%= render(:partial => 'layouts/navbar')%>
+</div>
+<h1>Editing Community</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', @community %> |
+<%= link_to 'Back', communities_path %>
+
+
+<div class="footer">
+<%= render(:partial => 'layouts/footer')%>
+</div>

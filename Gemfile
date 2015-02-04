@@ -43,3 +43,7 @@ group :development, :test do
   gem 'spring'
 end
 
+gem 'nivo-rails'
+gem 'paperclip', '~> 4.2.1'
+gem 'haml', '~> 4.0.6'
+

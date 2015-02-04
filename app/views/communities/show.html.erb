@@ -1,0 +1,31 @@
+<% @page_title = @community.name  %>
+<div class="header">
+<%= render(:partial => 'layouts/navbar')%>
+</div>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @community.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @community.description %>
+</p>
+
+<p>
+  <strong>Fellowship:</strong>
+  <%= @community.fellowship %>
+</p>
+
+<p>
+  <strong>Leader:</strong>
+  <%= @community.leader %>
+</p>
+
+<%= link_to 'Edit', edit_community_path(@community) %> |
+<%= link_to 'Back', communities_path %>
+<div class="footer">
+<%= render(:partial => 'layouts/footer')%>
+</div>

@@ -1,0 +1,15 @@
+<% @page_title = "Edit Resource" %>
+<div class="header">
+<%= render(:partial => 'layouts/navbar')%>
+</div>
+<div class="main">
+<h1>Editing Resource</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', @resource %> |
+<%= link_to 'Back', resources_path %>
+</div>
+<div class="footer">
+<%= render(:partial => 'layouts/footer')%>
+</div>

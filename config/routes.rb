@@ -1,4 +1,21 @@
 Rails.application.routes.draw do
+
+  root 'home_page#home'
+   
+  resources :resources do
+   resource :home_page 
+  end 
+  resources :admin_users do
+    resource :home_page 
+  end
+  resources :communities do
+    resource :home_page 
+  end
+  resources :scriptures do
+    resource :home_page 
+  end
+    
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
