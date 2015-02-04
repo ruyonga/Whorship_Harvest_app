@@ -45,6 +45,7 @@ end
 group :production do
   	gem 'pg'
 end
+gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'nivo-rails'
 gem 'paperclip', '~> 4.2.1'
 gem 'haml', '~> 4.0.6'
