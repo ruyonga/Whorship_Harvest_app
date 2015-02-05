@@ -13,6 +13,7 @@
  *= require_tree .
  *= require_self
  *= require nivo
+ *= require darkly
  *= require bootstrap.min
  *= require common
  *=js-image-slider

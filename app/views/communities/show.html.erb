@@ -1,33 +1,28 @@
 <% @page_title = @community.name  %>
 <div class="header">
-<%= render(:partial => 'layouts/navbar')%>
+	<%= render(:partial => 'layouts/navbar')%>
 </div>
 <div class="main">
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @community.name %>
-</p>
+	<div class="jumbotron">
+		<p id="notice"><%= notice %></p>
+		<h1>  <%= @community.name + " Missional Community"%></h1>
+		<p><%= @community.description %></p><br />
+		<%= @community.fellowship %>
+		<%= @community.leader %>
+		<p><a class="btn btn-primary btn-lg">Learn more</a></p>
+		<div class="col-md-5">
+             
+             <%= image_tag(@community.avatar.url(:medium), class: "img-thumbnail" ,alt: "300x300" )%>
+           </div>
+		</div
 
-<p>
-  <strong>Description:</strong>
-  <%= @community.description %>
-</p>
 
-<p>
-  <strong>Fellowship:</strong>
-  <%= @community.fellowship %>
-</p>
 
-<p>
-  <strong>Leader:</strong>
-  <%= @community.leader %>
-</p>
-
-<%= link_to 'Edit', edit_community_path(@community), :class=>"btn btn-default"%> |
-<%= link_to 'Back', communities_path,:class=>"btn btn-default" %>
-</div>
-<div class="footer">
-<%= render(:partial => 'layouts/footer')%>
+		<%= link_to 'Edit', edit_community_path(@community), :class=>"btn btn-default"%> |
+		<%= link_to 'Back', communities_path,:class=>"btn btn-default" %>
+	</div>
+	<div class="footer">
+		<%= render(:partial => 'layouts/footer')%>
+	</div>
 </div>

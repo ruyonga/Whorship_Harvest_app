@@ -4,7 +4,7 @@ ruby '2.2.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
 # Use mysql as the database for Active Record
-gem 'mysql2'
+#gem 'mysql2'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -44,7 +44,7 @@ group :development, :test do
 end
 group :production do
   	gem 'pg'
-  	gem 'rails_12factor'
+  	#gem 'rails_12factor'
 end
 gem 'bcrypt-ruby', '~> 3.1.5'
 gem 'nivo-rails'
