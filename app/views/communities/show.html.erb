@@ -4,24 +4,76 @@
 </div>
 <div class="main">
 
-	<div class="jumbotron">
-		<p id="notice"><%= notice %></p>
-		<h1>  <%= @community.name + " Missional Community"%></h1>
-		<p><%= @community.description %></p><br />
-		<%= @community.fellowship %>
-		<%= @community.leader %>
-		<p><a class="btn btn-primary btn-lg">Learn more</a></p>
-		<div class="col-md-5">
-             
-             <%= image_tag(@community.avatar.url(:medium), class: "img-thumbnail" ,alt: "300x300" )%>
-           </div>
-		</div
+	
 
 
 
-		<%= link_to 'Edit', edit_community_path(@community), :class=>"btn btn-default"%> |
-		<%= link_to 'Back', communities_path,:class=>"btn btn-default" %>
+
+	<div class="container" >
+		<div class="row clearfix">
+			<div class="col-md-12 column">
+				<div class="jumbotron show" >
+
+				<%= image_tag(@community.avatar.url(:medium), size: "400X300", class: "screenshot" ,alt: "avatar")%>
+					<div class="details">
+						<p id="notice"><%= notice %></p>
+						<div class="title">
+							<h1>  <%= @community.name + " Missional Community"%></h1></div>
+							<%= @community.description %><br />
+							<%= @community.fellowship %><br />
+							<%= @community.leader %>
+							<p>
+								<%= link_to 'Join Community', edit_community_path(@community), :class=>"btn btn-default"%> 
+
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="row clearfix">
+					<div class="col-md-8 column">
+						<div class="media well">
+							<a href="#" class="pull-left"><img src="http://lorempixel.com/64/64/" class="media-object" alt='' /></a>
+							<div class="media-body">
+								<h4 class="media-heading">
+									Nested media heading
+								</h4> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
+								<div class="media">
+									<a href="#" class="pull-left"><img src="http://lorempixel.com/64/64/" class="media-object" alt='' /></a>
+									<div class="media-body">
+										<h4 class="media-heading">
+											Nested media heading
+										</h4> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 column">
+						<div class="list-group">
+							<a href="#" class="list-group-item active">Home</a>
+							<div class="list-group-item">
+								List header
+							</div>
+							<div class="list-group-item">
+								<h4 class="list-group-item-heading">
+									List group item heading
+								</h4>
+								<p class="list-group-item-text">
+									...
+								</p>
+							</div>
+							<div class="list-group-item">
+								<span class="badge">14</span>Help
+							</div> <a class="list-group-item active"><span class="badge">14</span>Help</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
+	<%= link_to 'Edit', edit_community_path(@community), :class=>"btn btn-default"%> |
+	<%= link_to 'Back', communities_path,:class=>"btn btn-default" %>
+
 	<div class="footer">
 		<%= render(:partial => 'layouts/footer')%>
 	</div>

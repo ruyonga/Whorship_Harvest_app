@@ -3,54 +3,57 @@
   <%= render(:partial => 'layouts/navbar')%>
 </div>
 <div class="main">
-   <p id="notice"><%= notice %></p>
-   <h1 style="text-align:center; ">Our Missional Communities</h1>
-   <div class="well well-sm" >
-    <marquee> Join a missional Community Today and help in spreading the word of God</marquee>
-  </div>
+ <p id="notice"><%= notice %></p>
 
-<div>
-    <% @communities.each do |community|%>
-    <div class="col-md-8" >
-      <div class="panel panel-warning table-striped table-hover ">
-        <div class="panel-heading"><%=link_to( community.name + ' Missional Community' , community, :class =>"btn btn-default")%></div>
-        <div class="panel-body">
-
-
-          <div class="row featurette">
-            <div class="col-md-7">        
-              <p><%= community.description %></p>
-              <br />
-              Fellowship on: <em><%= community.fellowship%></em> <br />
-              Leader:<em> <%= community.leader %></em>  <br />
-        
-              <%= link_to("Join us", {:controller => 'admin_users', :action =>'new'}, :class =>"btn btn-default")%>           
-            </div>
-            <div class="col-md-5">
-             
-             <%= image_tag(community.avatar.url(:medium), class: "img-thumbnail" ,alt: "300x300" )%>
-           </div>
-         </div>      
-       </div>
-     </div>
-    </div>
-   <%end%>
-   <div class="col-md-4">
-    <div class="list-group" >
-      <a href="#" class="list-group-item active">
-        Up Comming Community Events
-      </a>
-      <a href="#" class="list-group-item"> Vising the Ederly
-      </a>
-      <a href="#" class="list-group-item">Morbi leo risus
-      </a>
-    </div>
-  </div>
-
+ <h1 style="text-align:center; ">Our Missional Communities</h1>
+ <div class="well well-sm" >
+  <marquee> Join a missional Community Today and help in spreading the word of God</marquee>
 </div>
 
+<div class="container">
+  <div class="row clearfix">
+    <div class="col-md-12 column">
+      <div class="row clearfix">
+        <div class="col-md-8 column">
+         <% @communities.each do |community|%>
+         <div class="panel panel-warning table-striped table-hover ">
+          <div class="panel-heading"><%=link_to( community.name + ' Missional Community' , community, :class =>"btn btn-default")%>
+          </div>
+          <div class="panel-body">
+            <div class="row featurette">
+              <div class="col-md-7 column">        
+                <p><%= community.description %></p>
+                <br />
+                Fellowship on: <em><%= community.fellowship%></em> <br />
+                Leader:<em> <%= community.leader %></em>  <br />
 
+                <%= link_to("Join us", {:controller => 'admin_users', :action =>'new'}, :class =>"btn btn-default")%>           
+              </div>
+              <div class="col-md-5">
 
+               <%= image_tag(community.avatar.url(:medium), class: "img-thumbnail" ,alt: "300x300" )%>
+             </div>
+           </div>      
+         </div>
+       </div>
+       <%end%>
+     </div>
+     <div class="col-md-4 column">
+       <div class="list-group" >
+        <a href="#" class="list-group-item active">
+          Up Comming Community Events
+        </a>
+        <a href="#" class="list-group-item"> Vising the Ederly
+        </a>
+        <a href="#" class="list-group-item">Morbi leo risus
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
 <div id="footer" style="position:bottom;">
   <%= render(:partial => 'layouts/footer')%>
 </div>

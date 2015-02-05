@@ -1,13 +1,40 @@
 .main{
 	margin-right: 5%;
-	margin-left: 5%;
+	margin-left: 3%;
 
 }
 
 body{ 
-  background: url(bg.jpeg) no-repeat center center fixed; 
+  background: url(bg2.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+
+.show {
+    padding-top: 10px;
+}
+.show .screenshot {
+    float: right;
+    border: 5px solid #fff;
+    
+    width: 400px;
+    height: 300px;
+}
+.show .details {
+    padding-right: 10px;
+}
+.show .details .title {
+  
+    font-size: 1.8em;
+    font-family: arial;
+    font-weight: bold;
+}
+ .show .details .info {
+    margin-top: 6px;
+    font-size: 1.3em;
+    font-family: Arial;
+    color: #636363;
+    line-height: 1.6;
 }
