@@ -23,7 +23,7 @@
 							<%= @community.fellowship %><br />
 							<%= @community.leader %>
 							<p>
-								<%= link_to 'Join Community', edit_community_path(@community), :class=>"btn btn-default"%> 
+								 <%= link_to("Join us",  new_community_user_path(:community_id), :class =>"btn btn-default")%> 
 
 							</p>
 						</div>

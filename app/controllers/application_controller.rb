@@ -6,5 +6,18 @@ class ApplicationController < ActionController::Base
 
   @resources = Resource.sorted
   @communities = Community.sorted
+
+  private
+
+  def confirm_logged_in
+  	unless  session[:user_id]
+  		flash[:notice] = "Please Login"
+  		redirect_to(:controller => 'login' ,:action => "login")
+  		return false
+  	else
+  		return true
+   	end
+  	
+  end
   
 end

@@ -69,7 +69,7 @@ GEM
     debugger-linecache (1.2.0)
     erubis (2.7.0)
     execjs (2.3.0)
-    globalid (0.3.0)
+    globalid (0.3.1)
       activesupport (>= 4.1.0)
     haml (4.0.6)
       tilt
@@ -176,6 +176,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt (~> 3.1.7)
   bcrypt-ruby (~> 3.1.5)
   bootstrap_form
   byebug

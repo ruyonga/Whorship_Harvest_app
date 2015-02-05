@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150204202700) do
+ActiveRecord::Schema.define(version: 20150205222131) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "first_name",          limit: 255
@@ -28,6 +28,26 @@ ActiveRecord::Schema.define(version: 20150204202700) do
 
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
 
+  create_table "categories", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.text     "description", limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "content_id",  limit: 4
+  end
+
+  add_index "categories", ["content_id"], name: "index_categories_on_content_id", using: :btree
+
+  create_table "comments", force: :cascade do |t|
+    t.text     "body",       limit: 65535
+    t.string   "author",     limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "user_id",    limit: 4
+  end
+
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
   create_table "communities", force: :cascade do |t|
     t.string   "name",                limit: 255
     t.text     "description",         limit: 65535
@@ -41,13 +61,38 @@ ActiveRecord::Schema.define(version: 20150204202700) do
     t.datetime "avatar_updated_at"
   end
 
+  create_table "contents", force: :cascade do |t|
+    t.string   "title",       limit: 255
+    t.text     "description", limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "user_id",     limit: 4
+  end
+
+  add_index "contents", ["user_id"], name: "index_contents_on_user_id", using: :btree
+
+  create_table "posts", force: :cascade do |t|
+    t.string   "title",      limit: 255
+    t.text     "body",       limit: 65535
+    t.string   "author",     limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "user_id",    limit: 4
+    t.integer  "comment_id", limit: 4
+  end
+
+  add_index "posts", ["comment_id"], name: "index_posts_on_comment_id", using: :btree
+
   create_table "resources", force: :cascade do |t|
     t.string   "title",       limit: 255
     t.text     "description", limit: 65535
     t.boolean  "published",   limit: 1
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.integer  "category_id", limit: 4
   end
+
+  add_index "resources", ["category_id"], name: "index_resources_on_category_id", using: :btree
 
   create_table "scriptures", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -57,4 +102,25 @@ ActiveRecord::Schema.define(version: 20150204202700) do
     t.datetime "updated_at",               null: false
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string   "first_name",          limit: 255
+    t.string   "last_name",           limit: 255
+    t.string   "email",               limit: 255
+    t.string   "phone",               limit: 255
+    t.string   "avatar_file_name",    limit: 255
+    t.string   "avatar_content_type", limit: 255
+    t.integer  "avatar_file_size",    limit: 4
+    t.datetime "avatar_updated_at"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "password_digest",     limit: 255
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+
+  add_foreign_key "categories", "contents"
+  add_foreign_key "comments", "users"
+  add_foreign_key "contents", "users"
+  add_foreign_key "posts", "comments"
+  add_foreign_key "resources", "categories"
 end

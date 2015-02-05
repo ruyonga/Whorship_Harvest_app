@@ -17,5 +17,5 @@
 //= require_tree .
 //= require js-image-slider
 //= require bootstrap.min
-//=
+
 
