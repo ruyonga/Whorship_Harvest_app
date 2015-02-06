@@ -43,8 +43,8 @@ group :development, :test do
   gem 'spring'
 end
 group :production do
- 
-  	gem 'rails_12factor'
+  
+  	#gem 'rails_12factor'
 end
 gem 'bcrypt-ruby', '~> 3.1.5'
 gem 'nivo-rails'
