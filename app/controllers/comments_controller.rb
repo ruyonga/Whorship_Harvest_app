@@ -54,7 +54,7 @@ class CommentsController < ApplicationController
     #1st you retrieve the post thanks to params[:post_id]
     post = Post.find(params[:post_id])
     #2nd you retrieve the comment thanks to params[:id]
-    @comment = post.comments.find(params[:id]
+    @comment = post.comments.find(params[:id])
   end
 
   # POST /comments
