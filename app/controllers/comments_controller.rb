@@ -101,7 +101,7 @@ class CommentsController < ApplicationController
     @comment = post.comments.find(params[:id])
     respond_to do |format|
        if @comment.update(comment_params)
-        format.html { redirect_to([@comment.post, @comment], :notice => 'Comment was success'
+        format.html { redirect_to([@comment.post, @comment], :notice => 'Comment was success')}
       format.json { render :show, status: :ok, location: @comment }
       else
         format.html { render :edit }
