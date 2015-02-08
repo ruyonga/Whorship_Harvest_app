@@ -1,4 +1,5 @@
 class CommunitiesController < ApplicationController
+  before_filter :authenticate_user!, :except =>[:index]
   before_action :set_community, only: [:show, :edit, :update, :destroy]
 
   # GET /communities
@@ -59,6 +60,13 @@ class CommunitiesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to communities_url, notice: 'Community was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def addPost
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 

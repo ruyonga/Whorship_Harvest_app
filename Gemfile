@@ -52,6 +52,8 @@ gem 'bootstrap_form'
 gem 'paperclip', '~> 4.2.1'
 #multiple image upload
 gem 'carrierwave'
-
 gem 'haml', '~> 4.0.6'
+gem 'devise', '~> 3.4.0'
+#gem 'bootstrap-sass', '~> 3.3.3'
+
 

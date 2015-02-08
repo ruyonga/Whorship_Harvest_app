@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    community_post = Community.find(params[:dommunity_id])
+    community_post = Community.find(params[:community_id])
     @posts = community_post.posts
   end
 

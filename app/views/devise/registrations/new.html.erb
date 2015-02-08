@@ -1,0 +1,50 @@
+<%@page_title = "Join Community"%>
+
+
+<div class="panel panel-warning">
+  <div class="panel-heading">
+    <h3 class="panel-title">Join Community</h3>
+  </div>
+  <div class="panel-body">
+    <%= bootstrap_form_for resource, :as => resource_name, :url => registration_path(resource_name), :html => {  :multipart => 'true' } do |f| %>
+    <%= devise_error_messages! %>
+    <table class="table table-striped table-hover ">
+
+      <tr>
+        <td>
+          <%= f.text_field :first_name ,:autofocus => true  %>
+        </td>
+        <td>
+          <%= f.text_field :last_name %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+         <%= f.password_field :password %>
+         
+       </td>
+       <td>
+         <%= f.password_field(:password_confirmation)%>
+       </td>
+     </tr>
+     <tr>
+      <td>
+       <%= f.text_field :phone %>
+     </td>
+     <td>
+      <%= f.text_field :email %>
+      
+    </td>
+  </tr>
+  <tr>
+    <td>     <%= f.file_field :avatar %></td>
+    <td>  <%= f.submit "Sign Up", :class =>'btn btn-primary btn-lg'%></td>
+  </tr>
+</table>
+<% end%>
+</div>
+</div>
+
+
+<%= render "devise/shared/links" %>
+

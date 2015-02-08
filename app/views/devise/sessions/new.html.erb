@@ -1,0 +1,31 @@
+<% @page_title = "Sign In" %>
+<div class="header">
+<%= render(:partial => 'layouts/navbar')%>
+</div>
+<div class="main">
+	<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+	<div class="container">
+
+		<form class="form-signin">
+			<h2 class="form-signin-heading">Please sign in</h2>
+
+			<%= f.email_field :email ,:placeholder=>"Email address", :class => "form-control", :autofocus => true %>
+			
+			<%= f.password_field :password, :class=>"form-control", :placeholder=>"Password" ,:required => true%>
+			<label class="checkbox">
+				<% if devise_mapping.rememberable? -%>
+				<%= f.check_box :remember_me %> <br/>
+				<% end -%>
+			</label>
+			
+			<%= f.submit "Sign in" , :class=>"btn btn-lg btn-primary btn-block" %>
+		</form>
+	<% end %>
+	</div> <!-- /container -->
+<%= render "devise/shared/links" %>
+
+
+</div>
+<div class="footer">
+<%= render(:partial => 'layouts/footer')%>
+</div>

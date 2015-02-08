@@ -1,14 +1,18 @@
 Rails.application.routes.draw do
+
+  devise_for :users 
   root 'home_page#home'
- get  'users', :to =>'login#index'
+  
 
   resources :home_page do
-     resources :login
-     resources :users
+    resources :users
+    devise_for :users
   end
 
   resources :communities do
     resources :users
+    resources :posts
+    
   end
 
   resources :users do 
@@ -16,13 +20,6 @@ Rails.application.routes.draw do
     resources :posts
     resources :contents
   end
-
-  resources :admin_users do
-    resources :communities
-    resources :resources
-    resources :categories
-  end
-  
   resources :categories
   resources :contents
   resources :comments
@@ -32,7 +29,10 @@ Rails.application.routes.draw do
   end
   resources :resources  
   resources :scriptures 
+  
+ 
 
+  get "communities/new_post" => "communities/addPost", :as => :addPost
 
   match ':controller(/:action(/:id))', :via => [:get, :post]
   # The priority is based upon order of creation: first created -> highest priority.

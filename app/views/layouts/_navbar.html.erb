@@ -18,7 +18,14 @@
       <input class="form-control col-lg-8" placeholder="Search" type="text">
     </form>
     <ul class="nav navbar-nav navbar-right">
-      <li class="<%= 'active' if params[:controller] == 'user' %>"><%= link_to("Member Login",{:controller => 'login', :action => 'index'}, )%></li>
+      <li class="">
+
+      <% if user_signed_in? %> 
+       <%= link_to("Member logout",destroy_user_session_path, :method => :delete )%>
+      <%else%>
+        <%= link_to("Member Login",new_user_session_path )%>
+      <%end%>
+         </li>
       <li class="dropdown " class="<%= 'active' if params[:controller] == 'help' %>" >
         <a aria-expanded="true" href="#" class="dropdown-toggle" data-toggle="dropdown">Help<b class="caret"></b></a>
         <ul class="dropdown-menu">
