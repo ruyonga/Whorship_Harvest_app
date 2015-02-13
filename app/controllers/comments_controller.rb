@@ -5,18 +5,18 @@ class CommentsController < ApplicationController
   # GET /comments.json
   def index
 
-    #get post_id
-    post = Post.find(params[:post_id])
+      #get post_id
+      post = Post.find(params[:post_id])
 
-    #gets all comments
-  #  @comments = Comment.
+      #gets all comments
+    #  @comments = Comment.
 
-  #get comments on post
-  @comment = post.comments
+    #get comments on post
+    @comment = post.comments
 
-  respond_to do |format|
-      format.html # index.html.erb
-      format.json  { render :json => @comments }
+    respond_to do |format|
+        format.html # index.html.erb
+        format.json  { render :json => @comments }
     end
   end
 
@@ -36,17 +36,17 @@ class CommentsController < ApplicationController
 
   # GET /comments/new
   def new
-   # @comment = Comment.new
+    @comment = Comment.new()
 
-    #1st you retrieve the post thanks to params[:post_id]
-    post = Post.find(params[:post_id])
-    #2nd you build a new one
-    @comment = post.comments.build
+    # #1st you retrieve the post thanks to params[:post_id]
+    # post = Post.find(params[:post_id])
+    # #2nd you build a new one
+    # @comment = post.Comments.build
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json  { render :json => @comment }
-    end
+    # respond_to do |format|
+    #   format.html # new.html.erb
+    #   format.json  { render :json => @comment }
+    # end
   end
 
   # GET /comments/1/edit
@@ -60,36 +60,19 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
-    # @comment = Comment.new(comment_params)
-
-    # respond_to do |format|
-    #   if @comment.save
-    #     format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
-    #     format.json { render :show, status: :created, location: @comment }
-    #   else
-    #     format.html { render :new }
-    #     format.json { render json: @comment.errors, status: :unprocessable_entity }
-    #   end
-    # end
-
-
-
-#1st you retrieve the post thanks to params[:post_id]
-    post = Post.find(params[:post_id])
-    #2nd you create the comment with arguments in params[:comment]
-    @comment = post.comments.create(params[:comment_params])
+    @comment = Comment.new(comment_params)
 
     respond_to do |format|
       if @comment.save
-        #1st argument of redirect_to is an array, in order to build the correct route to the nested resource comment
-        format.html { redirect_to([@comment.post, @comment], :notice => 'Comment was successfully created.') }
-        #the key :location is associated to an array in order to build the correct route to the nested resource comment
-        format.json  { render :json => @comment, :status => :created, :location => [@comment.post, @comment] }
+        format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
+        format.json { render :show, status: :created, location: @comment }
       else
-        format.html { render :action => "new" }
-        format.json  { render :json => @comment.errors, :status => :unprocessable_entity }
+        format.html { render :new }
+        format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
+
+
   end
 
   # PATCH/PUT /comments/1
@@ -128,6 +111,6 @@ class CommentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
-      params.require(:comment).permit(:body, :author)
+      params.require(:comment).permit(:body, :author, :user_id, :post_id)
     end
 end

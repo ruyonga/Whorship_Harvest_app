@@ -1,4 +1,12 @@
-<%= boostrap_form_for @post do |f| %>
+<div class="panel panel-warning">
+  <div class="panel-heading">
+
+    <h3 class="panel-title">Make a Post
+
+    </tr></h3>
+  </div>
+  <div class="panel-body">
+<%= bootstrap_form_for @post do |f| %>
   <% if @post.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
@@ -12,19 +20,26 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :title %><br>
+
     <%= f.text_field :title %>
   </div>
   <div class="field">
-    <%= f.label :body %><br>
+  
     <%= f.text_area :body %>
   </div>
   <div class="field">
-    <%= f.label :author %><br>
-    <%= f.text_field :author %>
+
+    <%= f.hidden_field :author , :value => current_user.first_name %>
+     <%= f.hidden_field :community_id, :value => params[:community_id] %>
+     <%= f.hidden_field :user_id, :value => current_user.id%>
   </div>
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
+</div>
+</div>
+<%= debug(params[:community_id])%>
+<%= debug(current_user.id)%>
 

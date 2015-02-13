@@ -27,10 +27,15 @@
                 Fellowship on: <em><%= community.fellowship%></em> <br />
                 Leader:<em> <%= community.leader %></em>  <br />
 
+                <% if user_signed_in? %>
+                 <%= link_to("Join G12",  new_community_user_path(:community_id), :class =>"btn btn-success")%> 
+                 <%= link_to("Mak a Post",  addPost_path ,:class => "btn btn-primary", :remote => true, data: {toggle: "modal", target: "#modal"} )%>
 
-                <%= link_to("Join us",  new_community_user_path(community.id),:class => "btn btn-default", :remote => true, data: {toggle: "modal", target: "#modal"} )%>   
+                 <%else%>
+                   <%= link_to("Join Us",new_community_user_path(community.id), :class =>"btn btn-default")%>
+                 <%end%>
 
-                <%= link_to("Mak a Post",  addPost_path ,:class => "btn btn-primary", :remote => true, data: {toggle: "modal", target: "#modal"} )%>   
+                   
                 <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                   
                 </div>
@@ -66,3 +71,4 @@
 <div id="footer" style="position:bottom;">
   <%= render(:partial => 'layouts/footer')%>
 </div>
+<!-- :remote => true, data: {toggle: "modal", target: "#modal"} -->

@@ -3,13 +3,14 @@
 
 <div class="panel panel-warning">
   <div class="panel-heading">
-    <h3 class="panel-title">Join Community</h3>
+    <h3 class="panel-title">Join Community </h3>
   </div>
   <div class="panel-body">
     <%= bootstrap_form_for resource, :as => resource_name, :url => registration_path(resource_name), :html => {  :multipart => 'true' } do |f| %>
     <%= devise_error_messages! %>
     <table class="table table-striped table-hover ">
-
+        <%= f.hidden_field :community_id, :value => @community %>
+        <%debug(@community)%>
       <tr>
         <td>
           <%= f.text_field :first_name ,:autofocus => true  %>

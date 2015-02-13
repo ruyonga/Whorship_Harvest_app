@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150207231318) do
+ActiveRecord::Schema.define(version: 20150212212840) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -29,8 +29,10 @@ ActiveRecord::Schema.define(version: 20150207231318) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.integer  "user_id",    limit: 4
+    t.integer  "post_id",    limit: 4
   end
 
+  add_index "comments", ["post_id"], name: "index_comments_on_post_id", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "communities", force: :cascade do |t|
@@ -57,16 +59,17 @@ ActiveRecord::Schema.define(version: 20150207231318) do
   add_index "contents", ["user_id"], name: "index_contents_on_user_id", using: :btree
 
   create_table "posts", force: :cascade do |t|
-    t.string   "title",      limit: 255
-    t.text     "body",       limit: 65535
-    t.string   "author",     limit: 255
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.integer  "user_id",    limit: 4
-    t.integer  "comment_id", limit: 4
+    t.string   "title",        limit: 255
+    t.text     "body",         limit: 65535
+    t.string   "author",       limit: 255
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "user_id",      limit: 4,     null: false
+    t.integer  "community_id", limit: 4
   end
 
-  add_index "posts", ["comment_id"], name: "index_posts_on_comment_id", using: :btree
+  add_index "posts", ["community_id"], name: "index_posts_on_community_id", using: :btree
+  add_index "posts", ["user_id"], name: "user_id", using: :btree
 
   create_table "resources", force: :cascade do |t|
     t.string   "title",       limit: 255
@@ -98,6 +101,8 @@ ActiveRecord::Schema.define(version: 20150207231318) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",     limit: 255
     t.string   "last_sign_in_ip",        limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "avatar_file_name",       limit: 255
     t.string   "avatar_content_type",    limit: 255
     t.integer  "avatar_file_size",       limit: 4
@@ -105,16 +110,19 @@ ActiveRecord::Schema.define(version: 20150207231318) do
     t.string   "first_name",             limit: 255
     t.string   "last_name",              limit: 255
     t.string   "phone",                  limit: 255
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+    t.integer  "community_id",           limit: 4
   end
 
+  add_index "users", ["community_id"], name: "index_users_on_community_id", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "categories", "contents"
+  add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "contents", "users"
-  add_foreign_key "posts", "comments"
+  add_foreign_key "posts", "communities"
+  add_foreign_key "posts", "users", name: "posts_ibfk_1"
   add_foreign_key "resources", "categories"
+  add_foreign_key "users", "communities"
 end

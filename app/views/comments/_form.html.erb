@@ -1,4 +1,4 @@
-<%= form_for(@comment) do |f| %>
+<%= bootstrap_form_for(@comment) do |f| %>
   <% if @comment.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
@@ -12,14 +12,18 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :body %><br>
+   
     <%= f.text_area :body %>
   </div>
   <div class="field">
-    <%= f.label :author %><br>
-    <%= f.text_field :author %>
+
+    <%= f.hidden_field :author , :value => current_user.first_name%>
+     <%= f.hidden_field :post_id, :value => params[:post_id]%>
+     <%= f.hidden_field :user_id, :value => current_user.id%>
   </div>
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
+<%=debug(current_user.id)%>

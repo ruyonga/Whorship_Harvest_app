@@ -1,11 +1,16 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  # before_action :find_community 
+  # before_action :find_user
+
 
   # GET /posts
   # GET /posts.json
   def index
-    community_post = Community.find(params[:community_id])
-    @posts = community_post.posts
+    # community_post = Community.find(params[:community_id])
+    # @posts = community_post.posts
+    @posts = Post.where(:community_id => @community)
+
   end
 
   # GET /posts/1
@@ -15,7 +20,9 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    @post = Post.new
+
+  @post = Post.new(:community_id => :community_id)
+    
   end
 
   # GET /posts/1/edit
@@ -25,7 +32,9 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(post_params)
+
+     
+     @post = Post.create(post_params)
 
     respond_to do |format|
       if @post.save
@@ -70,6 +79,20 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :body, :author)
+      params.require(:post).permit(:title, :body, :author,:community_id,:user_id)
+    end
+
+    def find_community
+       if params[:community_id]
+          @community =Community.find(params[:community_id])
+          puts @community
+        end
+    end
+
+    def find_user
+       if params[:user_id]
+          @user =  User.find(params[:user_id])
+          puts params[:user_id] 
+        end
     end
 end

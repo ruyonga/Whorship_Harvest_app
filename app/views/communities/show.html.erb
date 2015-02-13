@@ -23,7 +23,13 @@
 							<%= @community.fellowship %><br />
 							<%= @community.leader %>
 							<p>
-								 <%= link_to("Join us",  new_community_user_path(:community_id), :class =>"btn btn-default")%> 
+							 <% if user_signed_in? %>
+								 <%= link_to("Join G12",  new_community_user_path(:community_id), :class =>"btn btn-success")%> 
+								 <%= link_to("Mak a Post",  new_community_post_path(@community,current_user),:class => "btn btn-primary",)%>
+						     <%else%>
+						       <%= link_to("Join Us",new_community_user_path(@community.id), :class =>"btn btn-default")%>
+					          <%end%>
+
 
 							</p>
 						</div>
@@ -31,22 +37,26 @@
 				</div>
 				<div class="row clearfix">
 					<div class="col-md-8 column">
+					<% @post.each do |post|%>
 						<div class="media well">
-							<a href="#" class="pull-left"><img src="http://lorempixel.com/64/64/" class="media-object" alt='' /></a>
+							<a href="#" class="pull-left"><img src="http://lorempixel.com/64/64/" class="media-object" alt='' />
+
+							</a>
+							<%= post.author%>
 							<div class="media-body">
+							
 								<h4 class="media-heading">
-									Nested media heading
-								</h4> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
-								<div class="media">
-									<a href="#" class="pull-left"><img src="http://lorempixel.com/64/64/" class="media-object" alt='' /></a>
-									<div class="media-body">
-										<h4 class="media-heading">
-											Nested media heading
-										</h4> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
-									</div>
-								</div>
+									<%= post.title%>
+								</h4> 
+								<p>
+								 <%= post.body %>
+
+								</p>
+							      <%= link_to("Add Comment", new_community_post_comment_path(@community,current_user))%>
 							</div>
+
 						</div>
+					<%end%>
 					</div>
 					<div class="col-md-4 column">
 						<div class="list-group">

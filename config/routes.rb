@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
 
-  devise_for :users 
+ 
   root 'home_page#home'
   
+  
+  devise_for :users ,:controllers => { :registration => "registration" }
+
 
   resources :home_page do
     resources :users
@@ -11,14 +14,19 @@ Rails.application.routes.draw do
 
   resources :communities do
     resources :users
-    resources :posts
+    devise_for :users 
+    resources :posts do
+      resources :comments
+    end
     
   end
+
 
   resources :users do 
     resources :comments
     resources :posts
     resources :contents
+    resources :communities 
   end
   resources :categories
   resources :contents
@@ -26,11 +34,10 @@ Rails.application.routes.draw do
 
   resources :posts do
     resources :comments
+    resources :communities
   end
   resources :resources  
   resources :scriptures 
-  
- 
 
   get "communities/new_post" => "communities/addPost", :as => :addPost
 

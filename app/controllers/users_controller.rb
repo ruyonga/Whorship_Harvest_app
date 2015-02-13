@@ -1,9 +1,11 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :find_community
 
   # GET /users
   # GET /users.json
-  def index
+  def index   
     @users = User.all
   end
 
@@ -14,7 +16,7 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
-    @user = User.new
+    @user = User.new({:community_id => :community_id})
   end
 
   # GET /users/1/edit
@@ -24,11 +26,12 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(user_params)
+    @user.community = Community.find(params[:community_id])
+    @user = User.create(user_params)
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to :controller => "community" , notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -69,6 +72,12 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :email, :password, :phone, :avatar)
+      params.require(:user).permit(:first_name, :last_name, :email, :password, :phone, :avatar, :community_id)
+    end
+
+    def find_community
+       if params[:community_id]
+          @community=Community.find(params[:community_id])
+        end
     end
 end
