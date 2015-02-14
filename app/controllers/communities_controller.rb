@@ -1,5 +1,5 @@
 class CommunitiesController < ApplicationController
-  before_filter :authenticate_user!, :except =>[:index, :show]
+  before_filter :authenticate_user!, :except =>[:index]
   before_action :set_community, only: [:show, :edit, :update, :destroy]
 
   # GET /communities
@@ -12,12 +12,20 @@ class CommunitiesController < ApplicationController
   # GET /communities/1
   # GET /communities/1.json
   def show
-    @post = Post.where(:community_id => params[:id])
+     # @communities = Community.includes(:posts => :comments).find(params[:id])
+     # @posts = Community.find(params[:id]).posts
+     # @comments = Community.find(params[:id]).posts.comments
+    @posts = Post.where(:community_id => params[:id]).newest_first
+    @comments = Comment.where(1)
+
+    @comment = Comment.new(:post_id => :post_id)
+   
+     
   end
 
   # GET /communities/new
   def new
-    @community = Community.new
+    @community = Community.new()
   end
 
   # GET /communities/1/edit

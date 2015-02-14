@@ -3,18 +3,12 @@
 	<%= render(:partial => 'layouts/navbar')%>
 </div>
 <div class="main">
-
-	
-
-
-
-
 	<div class="container" >
 		<div class="row clearfix">
 			<div class="col-md-12 column">
 				<div class="jumbotron show" >
 
-				<%= image_tag(@community.avatar.url(:medium), size: "400X300", class: "screenshot" ,alt: "avatar")%>
+					<%= image_tag(@community.avatar.url(:medium), size: "400X300", class: "screenshot" ,alt: "avatar")%>
 					<div class="details">
 						<p id="notice"><%= notice %></p>
 						<div class="title">
@@ -23,12 +17,12 @@
 							<%= @community.fellowship %><br />
 							<%= @community.leader %>
 							<p>
-							 <% if user_signed_in? %>
-								 <%= link_to("Join G12",  new_community_user_path(:community_id), :class =>"btn btn-success")%> 
-								 <%= link_to("Mak a Post",  new_community_post_path(@community,current_user),:class => "btn btn-primary",)%>
-						     <%else%>
-						       <%= link_to("Join Us",new_community_user_path(@community.id), :class =>"btn btn-default")%>
-					          <%end%>
+								<% if user_signed_in? %>
+								<%= link_to("Join G12",  new_community_user_path(:community_id), :class =>"btn btn-success")%> 
+								<%= link_to("Mak a Post",  new_community_post_path(@community,current_user),:class => "btn btn-primary",)%>
+								<%else%>
+								<%= link_to("Join Us",new_community_user_path(@community.id), :class =>"btn btn-default")%>
+								<%end%>
 
 
 							</p>
@@ -37,27 +31,76 @@
 				</div>
 				<div class="row clearfix">
 					<div class="col-md-8 column">
-					<% @post.each do |post|%>
+						<% @posts.each do |post|%>
 						<div class="media well">
 							<a href="#" class="pull-left"><img src="http://lorempixel.com/64/64/" class="media-object" alt='' />
 
 							</a>
 							<%= post.author%>
 							<div class="media-body">
-							
+
 								<h4 class="media-heading">
-									<%= post.title%>
+									<%= link_to(post.title, edit_community_post_path(@community.id, post.id))%>
 								</h4> 
 								<p>
-								 <%= post.body %>
+									<%= post.body %>
+									<div>										
+										<% 
+										@comments = Comment.where(:post_id => post.id)
+										@comments.each do |comment| %>
+										<% @user = comment.user_id%>
 
+
+										<div class="media">
+											<%= image_tag(current_user.avatar.url(:thumb), size: "400X300", class: "pull-left" ,alt: "avatar")%>
+											<div class="media-body">
+												<h4 class="media-heading">
+													<%= link_to( comment.author, "#") %>
+												</h4>	<%= comment.body %>
+											</div>
+										</div>
+										<%end%>
+									</div>
+									<%= link_to("Add Comment", new_post_comment_path(post.id))%>
+
+									<%= render(:partial =>"comments/form",:locals =>{:comment => @comment, :post_id => post.id}) %>
 								</p>
-							      <%= link_to("Add Comment", new_community_post_comment_path(@community,current_user))%>
-							</div>
 
+							</div> 
 						</div>
-					<%end%>
+						<%end%>
 					</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 					<div class="col-md-4 column">
 						<div class="list-group">
 							<a href="#" class="list-group-item active">Home</a>
